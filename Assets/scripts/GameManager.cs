@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ballPrefabs;
     [SerializeField] private GameObject[] ballPositions;
 
-    [SerializeField] private GameObject cuvBall;
+    [SerializeField] private GameObject cueBall;
     [SerializeField] private GameObject ballLine;
+    [SerializeField] private GameObject camera;
 
     [SerializeField] private float xInput;
     [SerializeField] private float force;
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
+
+        camera = Camera.main.gameObject;
+        CameraBehindBall();
 
         SetBalls(BallColors.White,0);
         SetBalls(BallColors.Red, 1);
@@ -36,6 +40,10 @@ public class GameManager : MonoBehaviour
         {
             ShootBall();
         }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            StopBall();
+        }
     }
 
     void SetBalls(BallColors color,int pos)
@@ -47,12 +55,24 @@ public class GameManager : MonoBehaviour
     void RotateBall()
     {
         xInput = Input.GetAxis("Horizontal");
-        cuvBall.transform.Rotate(new Vector3(0f, xInput/10, 0f));
+        cueBall.transform.Rotate(new Vector3(0f, xInput/10, 0f));
     }
     void ShootBall()
     {
-        Rigidbody rd = cuvBall.GetComponent<Rigidbody>();
+        camera.transform.parent = null;
+        Rigidbody rd = cueBall.GetComponent<Rigidbody>();
         rd.AddRelativeForce(Vector3.forward * force, ForceMode.Impulse);
         ballLine.SetActive(false);
+    }
+    void CameraBehindBall()
+    {
+        camera.transform.parent = cueBall.transform;
+        camera.transform.position = cueBall.transform.position + new Vector3(0f, 20f, 0f);
+    }
+    void StopBall()
+    {
+        Rigidbody rd = cueBall.GetComponent<Rigidbody>();
+        rd.velocity = Vector3.zero;
+        rd.angularVelocity = Vector3.zero;
     }
 }
