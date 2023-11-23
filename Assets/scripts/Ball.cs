@@ -32,28 +32,36 @@ public class Ball : MonoBehaviour
     {
         switch (color)
         {
-            case BallColors.White: point = 0;
+            case BallColors.White: 
+                point = 0;
                 _meshRenderer.material.color = Color.white;
                 break;            
-            case BallColors.Red: point = 1;
+            case BallColors.Red: 
+                point = 1;
                 _meshRenderer.material.color = Color.red;
                 break;            
-            case BallColors.Yellow: point = 2;
+            case BallColors.Yellow: 
+                point = 2;
                 _meshRenderer.material.color = Color.yellow;
                 break;            
-            case BallColors.Green: point = 3;
+            case BallColors.Green: 
+                point = 3;
                 _meshRenderer.material.color = Color.green;
                 break;            
-            case BallColors.Brown: point = 4;
+            case BallColors.Brown: 
+                point = 4;
                 _meshRenderer.material.color = new Color32(145,81,9,255);
                 break;            
-            case BallColors.Blue: point = 5;
+            case BallColors.Blue: 
+                point = 5;
                 _meshRenderer.material.color = Color.blue;
                 break;            
-            case BallColors.Pink: point = 6;
+            case BallColors.Pink: 
+                point = 6;
                 _meshRenderer.material.color = Color.magenta;
                 break;                  
-            case BallColors.Black: point = 7;
+            case BallColors.Black: 
+                point = 7;
                 _meshRenderer.material.color = Color.black;
                 break;            
         }
