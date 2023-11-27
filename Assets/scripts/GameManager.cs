@@ -1,21 +1,27 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     [SerializeField] private int playerScore;
+    public int PlayerScore { get; set; }
     [SerializeField] private GameObject ballPrefabs;
     [SerializeField] private GameObject[] ballPositions;
 
     [SerializeField] private GameObject cueBall;
     [SerializeField] private GameObject ballLine;
     [SerializeField] private GameObject camera;
+    [SerializeField] private Image TextBG;
 
     [SerializeField] private float xInput;
     [SerializeField] private float force;
+    [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text devText;
 
     void Start()
     {
@@ -23,8 +29,9 @@ public class GameManager : MonoBehaviour
 
         camera = Camera.main.gameObject;
         CameraBehindBall();
+        UpdateScoreText();
+        ShowDevText();
 
-        SetBalls(BallColors.White,0);
         SetBalls(BallColors.Red, 1);
         SetBalls(BallColors.Yellow, 2);
         SetBalls(BallColors.Green, 3);
@@ -79,5 +86,15 @@ public class GameManager : MonoBehaviour
         CameraBehindBall();
         camera.transform.eulerAngles = new Vector3(80f, 0f, 0f);
         ballLine.SetActive(true);
+    }
+
+    public void UpdateScoreText()
+    {
+        TextBG.enabled =true;
+        scoreText.text = $"PlayerScore : {PlayerScore}";
+    }    
+    public void ShowDevText()
+    {
+        devText.text = $"นายกษิดิ์เดช สุทธิพัฒน์อนันต์ \n No.24 1650704719";
     }
 }
