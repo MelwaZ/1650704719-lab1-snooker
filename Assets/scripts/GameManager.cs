@@ -67,12 +67,17 @@ public class GameManager : MonoBehaviour
     void CameraBehindBall()
     {
         camera.transform.parent = cueBall.transform;
-        camera.transform.position = cueBall.transform.position + new Vector3(0f, 20f, 0f);
+        camera.transform.position = cueBall.transform.position + new Vector3(0f, 45f, 0f);
     }
     void StopBall()
     {
         Rigidbody rd = cueBall.GetComponent<Rigidbody>();
         rd.velocity = Vector3.zero;
         rd.angularVelocity = Vector3.zero;
+
+        cueBall.transform.eulerAngles = Vector3.zero;
+        CameraBehindBall();
+        camera.transform.eulerAngles = new Vector3(80f, 0f, 0f);
+        ballLine.SetActive(true);
     }
 }
